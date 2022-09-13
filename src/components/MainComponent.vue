@@ -7,9 +7,8 @@
             <img :src="item.images[0].path"
                  width="412" height="240">
           </div>
-          <div class="main-component--item-image-child" v-for="(row, indexImage) in item.images" :key="indexImage">
-            <img src="https://testknokey.contek.ru/site/api/image/large/e93e6d3d-aaca-4d10-a596-a9dd4a05bda7"
-                 width="162" height="112">
+          <div class="main-component--item-image-child" >
+            <img :src="itemPhoto.path" width="162" height="112" v-for="(itemPhoto, index2) in item.images" :key="index2">
           </div>
         </div>
         <div v-if="mapVisible === item.id"/>
@@ -197,8 +196,12 @@ h3 {
 }
 
 .main-component--item-image > .main-component--item-image-child > img:first-child {
-  margin: 16px 0;
+  display: none;
 }
+.main-component--item-image > .main-component--item-image-child > img:nth-child(2) {
+   margin: 16px 0;
+
+ }
 
 .main-component--item-image > div > img {
   border-radius: 8px;
@@ -221,7 +224,19 @@ h3 {
 .main-component {
   margin: 0 16px 0 0;
   display: flex;
-  height: 100%;
+  height: 90%;
   flex-direction: row-reverse;
+}
+@media screen and (max-width: 1070px) {
+  .main-component--item-image-child {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .main-component--item {
+    width: 100%;
+    flex-direction: column !important;
+  }
 }
 </style>

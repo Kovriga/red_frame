@@ -18,7 +18,12 @@ export default class App extends Vue {
 </script>
 
 <style lang="scss">
+#app {
+  overflow: auto;
+  height: 100vh;
+}
 body {
+  height: 100vh;
   margin: 0;
   background-color: #F8F8FF;
   overflow: hidden;
