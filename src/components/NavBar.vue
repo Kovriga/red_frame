@@ -40,7 +40,7 @@ export default class NavBar extends Vue {
 
 .nav-bar--logo{
   flex: 2;
-  background-image: url('../assets/LOGO.png');
+  background-image: url('../assets/logo.png');
   background-repeat: no-repeat;
   height: 100%;
   width: 100px;
@@ -66,7 +66,6 @@ p {
   align-items: center;
   height: 80px;
   width: 100%;
-  position: absolute;
   background-color: #ffffff;
   top: 0;
   left: 0;

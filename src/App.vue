@@ -1,15 +1,17 @@
 <template>
   <div id="app">
     <nav-bar/>
+    <main-component/>
   </div>
 </template>
 
 <script lang="ts">
 import {Options, Vue} from 'vue-class-component';
 import NavBar from "@/components/NavBar.vue";
+import MainComponent from "@/components/MainComponent.vue";
 
 @Options({
-  components: {NavBar}
+  components: {MainComponent, NavBar}
 })
 export default class App extends Vue {
 }
@@ -17,6 +19,7 @@ export default class App extends Vue {
 
 <style lang="scss">
 body {
+  margin: 0;
   background-color: #F8F8FF;
   overflow: hidden;
 }
