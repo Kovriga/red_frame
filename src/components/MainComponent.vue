@@ -7,11 +7,21 @@
             <img :src="item.images[0].path"
                  width="412" height="240">
           </div>
-          <div class="main-component--item-image-child" >
-            <img :src="itemPhoto.path" width="162" height="112" v-for="(itemPhoto, index2) in item.images" :key="index2">
+          <div class="main-component--item-image-child">
+            <img :src="itemPhoto.path" width="162" height="112" v-for="(itemPhoto, index2) in item.images"
+                 :key="index2">
           </div>
         </div>
-        <div v-if="mapVisible === item.id"/>
+        <div v-if="mapVisible === item.id" class="map">
+          <div class="button-location-in-map" @click="mapVisibleEdit(item.id)">
+            <div>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 0C4.42857 0 0 4.42857 0 10C0 15.5714 4.42857 20 10 20C15.5714 20 20 15.5714 20 10C20 4.42857 15.5714 0 10 0ZM13.8571 15L10 11.1429L6.14286 15L5 13.8571L8.85714 10L5 6.14286L6.14286 5L10 8.85714L13.8571 5L15 6.14286L11.1429 10L15 13.8571L13.8571 15Z" fill="#00D56A"/>
+              </svg>
+            </div>
+          </div>
+          <iframe :src="'https://yandex.ru/map-widget/v1/?ll='+item.l2+','+item.l1+'&pt='+item.l2+','+item.l1+'&sll='+item.l2+','+item.l1+'&z=17.09'" width="100%" height="100%" frameborder="0"></iframe>
+        </div>
         <div v-else class="main-component--item-content">
           <div class="main-component--item-content--header">
             <div>
@@ -41,7 +51,7 @@
             </div>
           </div>
           <div class="main-component--item-content--action">
-            <p>от 49 800 р. за 41 день</p>
+            <p>от {{ item.sum.toLocaleString() }} р. за 1 день</p>
             <div class="button-info">
               <p>ПОДРОБНЕЕ</p>
             </div>
@@ -62,7 +72,7 @@ import axios, {AxiosResponse} from "axios";
 
 export default class MainComponent extends Vue {
 
-  mapVisible: number|null = null;
+  mapVisible: number | null = null;
   allPost = [];
 
   created(): void {
@@ -72,7 +82,7 @@ export default class MainComponent extends Vue {
     })
   }
 
-  mapVisibleEdit(item: number): null|number {
+  mapVisibleEdit(item: number): null | number {
     if (this.mapVisible === item) {
       return this.mapVisible = null;
     }
@@ -82,6 +92,30 @@ export default class MainComponent extends Vue {
 </script>
 
 <style scoped>
+.button-location-in-map{
+  display: flex;
+  width: 48px;
+  height: 48px;
+  background: #FFFFFF;
+  border: 2px solid #00D56A;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 88%;
+}
+.map{
+  position: relative;
+  flex: auto;
+  margin: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.map > iframe {
+  width: 100%;
+  border-radius: 8px;
+}
 .main-component--item-content--action {
   display: flex;
   justify-content: space-between;
@@ -198,10 +232,11 @@ h3 {
 .main-component--item-image > .main-component--item-image-child > img:first-child {
   display: none;
 }
-.main-component--item-image > .main-component--item-image-child > img:nth-child(2) {
-   margin: 16px 0;
 
- }
+.main-component--item-image > .main-component--item-image-child > img:nth-child(2) {
+  margin: 16px 0;
+
+}
 
 .main-component--item-image > div > img {
   border-radius: 8px;
@@ -227,6 +262,7 @@ h3 {
   height: 90%;
   flex-direction: row-reverse;
 }
+
 @media screen and (max-width: 1070px) {
   .main-component--item-image-child {
     display: none !important;
