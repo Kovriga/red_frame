@@ -1,6 +1,7 @@
 <template>
   <div class="main-component">
-    <div>
+    <progress-spin v-if="spinVisible"></progress-spin>
+    <div v-else>
       <div v-for="(item, index) in allPost" :key="index" class="main-component--item">
         <div class="main-component--item-image">
           <div class="button-location-in-image" @click="galleryVisible = item.id">
@@ -76,9 +77,10 @@
 import {Options, Vue} from "vue-class-component";
 import axios, {AxiosResponse} from "axios";
 import GalleryComponent from "@/components/GalleryComponent.vue";
+import ProgressSpin from "@/components/ProgressSpin.vue";
 
 @Options({
-  components: {GalleryComponent}
+  components: {ProgressSpin, GalleryComponent}
 })
 
 export default class MainComponent extends Vue {
@@ -86,16 +88,20 @@ export default class MainComponent extends Vue {
   mapVisible: number | null = null;
   allPost = [];
   galleryVisible: number | null = null;
+  spinVisible = true;
 
   galleryVisibleFun(item: null): void {
-    this.galleryVisible = item
+    this.galleryVisible = item;
   }
 
   created(): void {
     axios.get('http://localhost:3000/posts').then((response: AxiosResponse) => {
-
       this.allPost = response.data;
-    })
+    }).finally(() => {
+      setTimeout(() => {
+        this.spinVisible = false;
+      }, 1000);
+    });
   }
 
   mapVisibleEdit(item: number): null | number {
