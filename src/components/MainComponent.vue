@@ -3,6 +3,15 @@
     <div>
       <div v-for="(item, index) in allPost" :key="index" class="main-component--item">
         <div class="main-component--item-image">
+          <div class="button-location-in-image" @click="galleryVisible = item.id">
+            <div>
+              <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.0001 14.6664C12.9441 14.6664 14.5201 13.0746 14.5201 11.1109C14.5201 9.14721 12.9441 7.55534 11.0001 7.55534C9.05601 7.55534 7.48005 9.14721 7.48005 11.1109C7.48005 13.0746 9.05601 14.6664 11.0001 14.6664Z" fill="white"/>
+                <path d="M7.7 0L5.687 2.22222H2.2C0.99 2.22222 0 3.22222 0 4.44444V17.7778C0 19 0.99 20 2.2 20H19.8C21.01 20 22 19 22 17.7778V4.44444C22 3.22222 21.01 2.22222 19.8 2.22222H16.313L14.3 0H7.7ZM11 16.6667C7.964 16.6667 5.5 14.1778 5.5 11.1111C5.5 8.04445 7.964 5.55556 11 5.55556C14.036 5.55556 16.5 8.04445 16.5 11.1111C16.5 14.1778 14.036 16.6667 11 16.6667Z" fill="white"/>
+              </svg>
+
+            </div>
+          </div>
           <div class="main-component--item-image-main">
             <img :src="item.images[0].path"
                  width="412" height="240">
@@ -57,6 +66,7 @@
             </div>
           </div>
         </div>
+        <gallery-component @closeGallery="galleryVisibleFun" :titleComponent="item.images" v-if="galleryVisible === item.id"/>
       </div>
     </div>
   </div>
@@ -65,15 +75,21 @@
 <script lang="ts">
 import {Options, Vue} from "vue-class-component";
 import axios, {AxiosResponse} from "axios";
+import GalleryComponent from "@/components/GalleryComponent.vue";
 
 @Options({
-  components: {}
+  components: {GalleryComponent}
 })
 
 export default class MainComponent extends Vue {
 
   mapVisible: number | null = null;
   allPost = [];
+  galleryVisible: number | null = null;
+
+  galleryVisibleFun(item: null): void {
+    this.galleryVisible = item
+  }
 
   created(): void {
     axios.get('http://localhost:3000/posts').then((response: AxiosResponse) => {
@@ -92,6 +108,19 @@ export default class MainComponent extends Vue {
 </script>
 
 <style scoped>
+.button-location-in-image{
+  display: flex;
+  width: 48px;
+  height: 48px;
+  background: none;
+  border: 2px solid white;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 26px;
+  bottom: 30px;
+}
 .button-location-in-map{
   display: flex;
   width: 48px;
@@ -221,6 +250,7 @@ h3 {
 }
 
 .main-component--item-image {
+  position: relative;
   display: flex;
 }
 
