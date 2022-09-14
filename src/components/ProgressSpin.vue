@@ -25,7 +25,7 @@ export default class ProgressSpin extends Vue {
   height: 50px;
 
   & .path {
-    stroke: hsl(210, 70, 75);
+    stroke: rgb(0, 213, 106);
     stroke-linecap: round;
     animation: dash 1.5s ease-in-out infinite;
   }

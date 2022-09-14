@@ -113,7 +113,7 @@ export default class MainComponent extends Vue {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .button-location-in-image{
   display: flex;
   width: 48px;

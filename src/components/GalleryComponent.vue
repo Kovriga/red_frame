@@ -82,7 +82,7 @@ export default class GalleryComponent extends Vue.with(Props) {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .button {
   display: flex;
   height: 100vh;
