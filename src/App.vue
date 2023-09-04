@@ -18,6 +18,9 @@ export default class App extends Vue {
 </script>
 
 <style lang="scss">
+*{
+  transition: .5s !important;
+}
 #app {
   overflow: auto;
   height: 100vh;

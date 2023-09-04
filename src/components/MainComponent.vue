@@ -10,7 +10,6 @@
                 <path d="M11.0001 14.6664C12.9441 14.6664 14.5201 13.0746 14.5201 11.1109C14.5201 9.14721 12.9441 7.55534 11.0001 7.55534C9.05601 7.55534 7.48005 9.14721 7.48005 11.1109C7.48005 13.0746 9.05601 14.6664 11.0001 14.6664Z" fill="white"/>
                 <path d="M7.7 0L5.687 2.22222H2.2C0.99 2.22222 0 3.22222 0 4.44444V17.7778C0 19 0.99 20 2.2 20H19.8C21.01 20 22 19 22 17.7778V4.44444C22 3.22222 21.01 2.22222 19.8 2.22222H16.313L14.3 0H7.7ZM11 16.6667C7.964 16.6667 5.5 14.1778 5.5 11.1111C5.5 8.04445 7.964 5.55556 11 5.55556C14.036 5.55556 16.5 8.04445 16.5 11.1111C16.5 14.1778 14.036 16.6667 11 16.6667Z" fill="white"/>
               </svg>
-
             </div>
           </div>
           <div class="main-component--item-image-main">
@@ -25,8 +24,9 @@
         <div v-if="mapVisible === item.id" class="map">
           <div class="button-location-in-map" @click="mapVisibleEdit(item.id)">
             <div>
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 0C4.42857 0 0 4.42857 0 10C0 15.5714 4.42857 20 10 20C15.5714 20 20 15.5714 20 10C20 4.42857 15.5714 0 10 0ZM13.8571 15L10 11.1429L6.14286 15L5 13.8571L8.85714 10L5 6.14286L6.14286 5L10 8.85714L13.8571 5L15 6.14286L11.1429 10L15 13.8571L13.8571 15Z" fill="#00D56A"/>
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <rect x="14" y="32" width="26" height="3" rx="1" transform="rotate(-45 14 32)" fill="#00D56A"/>
+                <rect x="16" y="14" width="26" height="3" rx="1" transform="rotate(45 16 14)" fill="#00D56A"/>
               </svg>
             </div>
           </div>
@@ -129,12 +129,14 @@ export default class MainComponent extends Vue {
   width: 48px;
   height: 48px;
   background: #FFFFFF;
-  border: 2px solid #00D56A;
   border-radius: 8px;
   justify-content: center;
   align-items: center;
   position: absolute;
   left: 88%;
+  div:hover > svg > rect {
+    fill: #01002C !important;
+  }
 }
 .map{
   position: relative;
@@ -183,6 +185,10 @@ export default class MainComponent extends Vue {
   border-radius: 8px;
   justify-content: center;
   align-items: center;
+}
+
+.button-info:hover {
+  background: #01002C;
 }
 
 .main-component--item-content--content > div {
@@ -243,6 +249,10 @@ h3 {
   border-radius: 8px;
   justify-content: center;
   align-items: center;
+}
+
+.button-location:hover > div {
+  background: #01002C;
 }
 
 .main-component--item-content {

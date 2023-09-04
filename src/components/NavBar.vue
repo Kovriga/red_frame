@@ -31,7 +31,6 @@ import {Vue, Options} from "vue-class-component";
 @Options({})
 
 export default class NavBar extends Vue {
-  name = "NavBar";
 }
 </script>
 
@@ -77,6 +76,12 @@ p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.button:hover {
+  color: #00D56A;
+  svg > path {
+    fill: #00D56A;
+  }
 }
 @media screen and (max-width: 900px) {
   p {
