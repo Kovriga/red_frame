@@ -46,7 +46,7 @@ import {Options, prop, Vue} from "vue-class-component";
 
 
 class Props {
-  titleComponent: any = prop({
+  titleComponent: never = prop({
     required: true,
   });
 }

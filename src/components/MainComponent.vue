@@ -75,9 +75,9 @@
 
 <script lang="ts">
 import {Options, Vue} from "vue-class-component";
-import axios, {AxiosResponse} from "axios";
 import GalleryComponent from "@/components/GalleryComponent.vue";
 import ProgressSpin from "@/components/ProgressSpin.vue";
+import DATA from "@/../db.json"
 
 @Options({
   components: {ProgressSpin, GalleryComponent}
@@ -86,7 +86,7 @@ import ProgressSpin from "@/components/ProgressSpin.vue";
 export default class MainComponent extends Vue {
 
   mapVisible: number | null = null;
-  allPost = [];
+  allPost: unknown[] = [];
   galleryVisible: number | null = null;
   spinVisible = true;
 
@@ -94,14 +94,11 @@ export default class MainComponent extends Vue {
     this.galleryVisible = item;
   }
 
-  created(): void {
-    axios.get('http://localhost:3000/posts').then((response: AxiosResponse) => {
-      this.allPost = response.data;
-    }).finally(() => {
-      setTimeout(() => {
-        this.spinVisible = false;
-      }, 1000);
-    });
+  async mounted (): Promise<void> {
+    this.allPost = DATA.posts as unknown[];
+    setTimeout(() => {
+      this.spinVisible = false;
+    }, 1000);
   }
 
   mapVisibleEdit(item: number): null | number {
@@ -293,10 +290,11 @@ h3 {
 }
 
 .main-component {
+  flex-direction: row-reverse;
+  justify-content: center;
   margin: 0 16px 0 0;
   display: flex;
   height: 90%;
-  flex-direction: row-reverse;
 }
 
 @media screen and (max-width: 1070px) {
